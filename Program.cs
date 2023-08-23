@@ -12,16 +12,6 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .Build();
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddDefaultPolicy(builder =>
-//    {
-//        builder.WithOrigins("http://localhost:4200") // Replace with your Angular app's URL
-//            .AllowAnyHeader()
-//            .AllowAnyMethod();
-//    });
-//});
-
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -41,23 +31,6 @@ builder.Services.AddAuthentication(opt => {
     });
 
 // Add services to the container.
-
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer(options =>
-//{
-//    options.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidateIssuer = true,
-//        ValidateAudience = true,
-//        ValidateIssuerSigningKey = true,
-//        ValidIssuer = configuration["Jwt:Issuer"],
-//        ValidAudience = configuration["Jwt:Issuer"],
-//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
-//    };
-//});
 
 var jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), "data", "books.json");
 builder.Services.AddSingleton(new JsonFileDatabase<Book>(jsonFilePath));
